@@ -18,7 +18,7 @@ async def start(message: types.Message):
 
 @dp.message_handler(commands = 'help')
 async def help(message: types.Message):
-    await message.reply('how about you discombobulat e')
+    await message.reply('how about you kindly discombobulat e')
 
 @dp.message_handler(commands='lobotomy')
 async def help(message: types.Message):
