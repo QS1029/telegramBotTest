@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher,types, executor
 from config import TELEGRAM_TOKEN
 from keyboard.keyboards import get_keyboard_1, get_keyboard_2, get_keyboard_3
+from keyboard.key_inline import get_keyboard_inline
 
 bot = Bot(token = TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
@@ -23,7 +24,7 @@ async def start(message: types.Message):
 #KITTY PIC
 @dp.message_handler(lambda message: message.text == "send me a kitty!11!11")
 async def button_1_click(message: types.Message):
-    await bot.send_photo(message.chat.id, photo = 'https://i.pinimg.com/originals/a4/24/ab/a424ab7e7e419a35a4f980eb5ed84921.jpg', caption = 'he is wanted in 15 countires across the world.')
+    await bot.send_photo(message.chat.id, photo = 'https://i.pinimg.com/originals/a4/24/ab/a424ab7e7e419a35a4f980eb5ed84921.jpg', caption = 'he is wanted in 15 countires across the world.', reply_markup = get_keyboard_inline())
 
 #PROCEED TO KEYBOARD2
 @dp.message_handler(lambda message: message.text == "Would. Next keyboard.")
