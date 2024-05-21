@@ -2,11 +2,13 @@ from aiogram import Bot, Dispatcher,types, executor
 from config import TELEGRAM_TOKEN
 from keyboard.keyboards import get_keyboard_1, get_keyboard_2, get_keyboard_3
 from keyboard.key_inline import get_keyboard_inline, get_keyboard_start1, get_keyboard_start2
+from database.database import initialize_db, get_user, add_user
 import random
 from datetime import datetime
 
 bot = Bot(token = TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
+initialize_db()
 
 #COMMAND LIST
 async def set_commands(bot: Bot):
@@ -20,7 +22,11 @@ async def set_commands(bot: Bot):
 #START MENU
 @dp.message_handler(commands = 'start')
 async def start(message: types.Message):
-    await message.reply('hiiiiii welcome the main menu of this definetely good bot!!!', reply_markup = get_keyboard_start1())
+    user = get_user(message.from_user.id)
+    if user is None: add_user(message.from_user.id, message.from_user.username, message.from_user.first_name, message.from_user.last_name)
+    await message.reply('hiiiiii welcome the main menu of this definetely good bot!!!',
+                        reply_markup = get_keyboard_start1())
+
 
 @dp.callback_query_handler(lambda c: c.data == 'send_random_number')
 async def random_number(callback_query: types.CallbackQuery):
